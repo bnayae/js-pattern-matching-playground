@@ -23,6 +23,11 @@ function IBarTypeGuard(arg: any): arg is IBar {
         arg.b !== undefined;
 }
 
+function IBarArrayTypeGuard(arg: any): arg is IBar {
+    return Array.isArray(arg) && arg[0].a !== undefined &&
+        arg[0].b !== undefined;
+}
+
 export interface ISampleProps {
     readonly title: string;
     readonly data?: (() => string) | string | number | boolean | IFoo | IBar | string[] | IFoo[] | IBar[]
@@ -51,6 +56,9 @@ const Sample = (props: ISampleProps) => {
 
         if (IBarTypeGuard(candidate)) { // order is matters
             return "is Bar";
+        }
+        if (IBarArrayTypeGuard(candidate)) { // order is matters
+            return "IS BAR ARRAY";
         }
         if (IFooTypeGuard(candidate)) { // order is matters
             return "is Foo";
