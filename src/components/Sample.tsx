@@ -9,8 +9,11 @@ export interface IFoo {
     readonly a: string;
 }
 
-function IFooTypeGuard(arg: any): arg is IFoo {
+function IFooTypeGuard_(arg: any): boolean {
     return arg.a !== undefined;
+}
+function IFooTypeGuard(arg: any): arg is IFoo {
+    return IFooTypeGuard_(arg);
 }
 
 export interface IBar extends IFoo {
@@ -18,14 +21,17 @@ export interface IBar extends IFoo {
     readonly c?: boolean;
 }
 
-function IBarTypeGuard(arg: any): arg is IBar {
-    return arg.a !== undefined &&
+function IBarTypeGuard_(arg: any): boolean {
+    return IFooTypeGuard_(arg) &&
         arg.b !== undefined;
 }
 
+function IBarTypeGuard(arg: any): arg is IBar {
+    return IBarTypeGuard_(arg);
+}
+
 function IBarArrayTypeGuard(arg: any): arg is IBar {
-    return Array.isArray(arg) && arg[0].a !== undefined &&
-        arg[0].b !== undefined;
+    return Array.isArray(arg) && IBarTypeGuard_(arg[0]);
 }
 
 export interface ISampleProps {
