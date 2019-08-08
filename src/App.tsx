@@ -11,6 +11,7 @@ const App: React.FC = () => {
       <Sample title="xyz" data="xyz" />
       <Sample title="['a', 'b', 'c']" data={['a', 'b', 'c']} />
       <Sample title="{ a: 'x'}" data={{ a: 'x' }} />
+      <Sample title="[{ a: 'x'}]" data={[{ a: 'x' }]} />
       <Sample title="{ a: 'x', b: 1}" data={{ a: 'x', b: 1 }} />
       <Sample title="{ a: 'x', b: 1, c: true}" data={{ a: 'x', b: 1, c: true }} />
       <Sample title="function" data={() => "hi"} />
