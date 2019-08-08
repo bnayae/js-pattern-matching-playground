@@ -30,7 +30,7 @@ function IBarTypeGuard(arg: any): arg is IBar {
     return IBarTypeGuard_(arg);
 }
 
-function IBarArrayTypeGuard(arg: any): arg is IBar {
+function IBarArrayTypeGuard(arg: any): arg is IBar[] {
     return Array.isArray(arg) && IBarTypeGuard_(arg[0]);
 }
 
